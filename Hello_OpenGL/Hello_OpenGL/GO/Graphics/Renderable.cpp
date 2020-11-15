@@ -3,30 +3,27 @@
 namespace go
 {
 
-	Renderable::Renderable():
-	m_defaultShader("GO/GLSL/DefaultTextureVertexShader.glsl", "GO/GLSL/DefaultTextureFragmentShader.glsl")
-	{}
+	Renderable::Renderable()
+	{ }
 
 	//Setters:
 	void Renderable::setPosition(Vec2f position)
 	{
 		m_position = position;
-		setShader();
 	}
 
 	void Renderable::setSize(Vec2f size)
 	{
 		m_size = size;
-		setShader();
 	}
 
 	//Getters:
-	Vec2f Renderable::getPosition()
+	Vec2f Renderable::getPosition() const
 	{
 		return m_position;
 	}
 
-	Vec2f Renderable::getSize()
+	Vec2f Renderable::getSize() const
 	{
 		return m_size;
 	}
@@ -34,14 +31,15 @@ namespace go
 	void Renderable::draw(go::Vec2ui windowSize)
 	{
 		m_windowSize = windowSize;
-		setShader();
 		m_defaultShader.use();
+		m_defaultVertexArray.bind();
+		setShader();
 		//std::cout << "Renderable::draw()" << std::endl;
 	}
 
 	void Renderable::setShader()
 	{
-		m_defaultShader.setVertices(m_position, m_size, m_windowSize);
+		m_defaultVertexArray.setVertices(m_position, m_size, m_windowSize);
 	}
 
 }

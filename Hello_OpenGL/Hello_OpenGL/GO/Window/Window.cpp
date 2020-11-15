@@ -28,7 +28,7 @@ namespace go
 
 	bool Window::Init()
 	{
-		/*INIT GLFW*/
+		/*init GLFW*/
 		if (!glfwInit())
 		{
 			std::cerr << "GLFW could not initialize!" << std::endl;
@@ -56,7 +56,7 @@ namespace go
 
 		glfwMakeContextCurrent(m_window);
 
-		/*init the GLAD*/
+		/*init GLAD*/
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
 			std::cerr << "GLAD could not initialize!" << std::endl;

@@ -1,4 +1,3 @@
-#pragma once
 #ifndef GO_WINDOW_H
 #define GO_WINDOW_H
 

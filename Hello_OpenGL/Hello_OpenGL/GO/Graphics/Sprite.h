@@ -1,4 +1,3 @@
-#pragma once
 #ifndef GO_SPRITE_H
 #define GO_SPRITE_H
 
@@ -14,13 +13,14 @@ namespace go
 	public:
 		Sprite();
 		Sprite(go::Texture& texture);
+		~Sprite();
 
 
 		void setTexture(Texture& texture);
 		void setPosition(Vec2f) override;
 		void setSize(Vec2f) override;
-		Vec2f getPosition() override;
-		Vec2f getSize() override;
+		Vec2f getPosition() const override;
+		Vec2f getSize() const override;
 	
 	
 	private:

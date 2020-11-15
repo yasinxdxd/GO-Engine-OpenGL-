@@ -1,7 +1,7 @@
 #include "Window/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Sprite.h"
-
+#include "Graphics/Text.h"
 #include <chrono>
 #include <thread>
 #include <time.h>
@@ -9,67 +9,67 @@
 
 int main()
 {
-	go::Window window(go::Vec2ui(320, 240), "Window!!!");
-	
-	
-	
-
-	float x=10, y=10;
-	float sx = 2, sy = 2;
-
-	go::Texture texture2("assets/dvd2png.png");
-	go::Sprite sprite2(texture2);
-	sprite2.setSize(go::Vec2f(160, 160));
-	sprite2.setPosition(go::Vec2f(x, y));
-	
-	
+	go::Window window(go::Vec2ui(600, 400), "Window!!!");
 	/*
-	go::Renderable renderable1;
-	renderable1.setSize(go::Vec2f(0.3, 0.4));
-	renderable1.setPosition(go::Vec2f(0.2, 0.2));
-	go::Renderable renderable2;
-	renderable2.setSize(go::Vec2f(0.5, 0.5));
-	renderable2.setPosition(go::Vec2f(-0.4, -0.3));
+	go::texture2d tex;
+	try
+	{
+		tex.load_from_file("assets/dvd1.png");
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 	*/
 
+	go::Texture texture("assets/woodyFloor.jpg");
+	go::Sprite sprite(texture);
+	sprite.setPosition(go::Vec2f(200, 320));
+	sprite.setSize(go::Vec2f(50, 50));
+
+	go::Texture t("assets/texture_sand.png");
+	go::Sprite s(t);
+	s.setPosition(go::Vec2f(0, 0));
+	s.setSize(go::Vec2f(200, 200));
+	float x1=0, y1=0, x2=200, y2=320;
+
+
+
+
 	float FPS = 60.0;
-	float start, end, res=0, delay;
+	float start, end, res, delay;
 	
 	while (!window.isClose())
 	{
-		start = (float)glfwGetTime() * 1000;
+		start = (float)glfwGetTime()*1000000;
 		/////////////////////////////////////////////////////////////////////
 		window.pollEvent();
-		
-		if (sprite2.getPosition().x + sprite2.getSize().x > window.getWidth() || sprite2.getPosition().x < 0 )
-		{
-			sx *= -1;
-		}
-		if (sprite2.getPosition().y + sprite2.getSize().y > window.getHeight() || sprite2.getPosition().y < 0)
-		{
-			sy *= -1;
-		}
+		s.setPosition(go::Vec2f(x1, y1));
+		x1 += 2;
+		y1 += 2;
 
-		x+=sx;
-		y+=sy;
-		sprite2.setPosition(go::Vec2f(x, y));
-	
-		//renderable1.setPosition(go::Vec2f(-0.5, 0.0));
+		x2--;
+		sprite.setPosition(go::Vec2f(x2, y2));
 
 
 		window.clear();
-		window.render(sprite2);
+		window.render(sprite);
+		window.render(s);
 		window.display();
 
 
-
 		/////////////////////////////////////////////////////////////////////
-		end = (float)glfwGetTime() * 1000;
-		res = end - start;
-	
-		delay = (1000.0 / FPS) - res;
-		std::this_thread::sleep_for(std::chrono::milliseconds((int(delay))));
+		end = (float)glfwGetTime()*1000000;
 		
+		res = end - start;
+		
+		delay = (1000000 / FPS) - res;
+		if (delay > 0)
+		{
+			std::this_thread::sleep_for(std::chrono::microseconds((int(delay))));
+			std::cout << 1000000/res << std::endl;
+		}
+	
 	}
 	
 

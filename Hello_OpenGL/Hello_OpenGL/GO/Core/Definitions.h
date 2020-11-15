@@ -1,4 +1,3 @@
-#pragma once
 #ifndef GO_DEFINITIONS_H
 #define GO_DEFINITIONS_H
 /*
@@ -24,6 +23,7 @@ WCHAR_T						2 OR 4								1 WIDE CHARACTER
 #ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
 #endif
+
 
 
 typedef		short int					GOsint;			//2
