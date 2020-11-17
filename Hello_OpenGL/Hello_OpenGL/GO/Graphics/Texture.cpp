@@ -35,6 +35,7 @@ namespace go
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);	// GL_NEAREST, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+
 		stbi_set_flip_vertically_on_load(true);
 		
 		loadFromFile(path_file);
@@ -47,12 +48,12 @@ namespace go
 	
 	void Texture::loadFromFile(GOcchar* path_file)
 	{
-		textureData.data = stbi_load(path_file, &textureData.size.x, &textureData.size.y, &textureData.channels, 3);
+		textureData.data = stbi_load(path_file, &textureData.size.x, &textureData.size.y, &textureData.channels, STBI_rgb_alpha);
 		if(stbi_failure_reason())
 			std::cout << "stbi failure reason: " << stbi_failure_reason() << std::endl;
 		if (textureData.data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureData.size.x, textureData.size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData.data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureData.size.x, textureData.size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData.data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else
