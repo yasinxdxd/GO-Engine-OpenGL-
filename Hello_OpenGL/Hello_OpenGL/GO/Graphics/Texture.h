@@ -19,7 +19,6 @@ namespace go
 		void loadFromFile(GOcchar* path_file);
 		
 	private:
-
 		struct textureData
 		{
 			Vec2i size;
