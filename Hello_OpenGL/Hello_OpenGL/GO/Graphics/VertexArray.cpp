@@ -47,12 +47,12 @@ namespace go
 		glDeleteBuffers(1, &EBO);
 	}
 
-	void VertexArray::setVertices(go::Vec2f position, go::Vec2f size, go::Vec2ui windowSize)
+	void VertexArray::setVertices(go::Vec2f origin, go::Vec2f position, go::Vec2f size, go::Vec2ui windowSize)
 	{
-		vertices[0] = (position.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[1] = (position.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
-		vertices[8] = (position.x + size.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);		vertices[9] = (position.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
-		vertices[16] = (position.x + size.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);		vertices[17] = (position.y + size.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
-		vertices[24] = (position.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[25] = (position.y + size.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		vertices[0] = (-origin.x + position.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[1] = (-origin.y + position.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		vertices[8] = (-origin.x + position.x + size.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);		vertices[9] = (-origin.y + position.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		vertices[16] = (-origin.x + position.x + size.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);		vertices[17] = (-origin.y + position.y + size.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		vertices[24] = (-origin.x + position.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[25] = (-origin.y + position.y + size.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -75,6 +75,13 @@ namespace go
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	}
+
+	void VertexArray::unBind()
+	{
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 }
