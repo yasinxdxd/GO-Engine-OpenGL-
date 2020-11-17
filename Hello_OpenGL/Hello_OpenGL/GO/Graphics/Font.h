@@ -12,16 +12,13 @@ namespace go
 	class Font
 	{
 	public:
-
 		Font();
 		Font(GOcchar* path_file);
 		~Font();
 
 		void loadFromFile(GOcchar* path_file);
 
-
 	private:
-
 		struct m_character 
 		{
 			GOuint m_texture;	 // ID handle of the glyph texture
@@ -34,7 +31,7 @@ namespace go
 		FT_Library ft;
 		FT_Face face;
 
-		std::map<char, m_character> m_font_characters;
+		std::map<char, m_character> m_FontCharacters;
 
 		
 		friend class Text;

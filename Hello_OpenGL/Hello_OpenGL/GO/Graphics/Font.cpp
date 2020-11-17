@@ -51,9 +51,9 @@ namespace go
                     continue;
                 }
                 ////////////////////////////////////////////////////////////////////
-                GOuint texture;
-                glGenTextures(1, &texture);
-                glBindTexture(GL_TEXTURE_2D, texture);
+                m_character character;
+                glGenTextures(1, &character.m_texture);
+                glBindTexture(GL_TEXTURE_2D, character.m_texture);
                 ////////////////////////////////////////////////////////////////////
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -61,19 +61,23 @@ namespace go
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                 ////////////////////////////////////////////////////////////////////
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width, face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
+                //glGenerateMipmap(GL_TEXTURE_2D);
                 ////////////////////////////////////////////////////////////////////
-                m_character character = {
-                        texture,
-                        go::Vec2i(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-                        go::Vec2i(face->glyph->bitmap_left, face->glyph->bitmap_top),
-                        static_cast<GOuint>(face->glyph->advance.x)
-                };
-                m_font_characters.insert(std::pair<char, m_character>(c, character));
+                
+                character.size = go::Vec2i(face->glyph->bitmap.width, face->glyph->bitmap.rows);
+                character.bearing = go::Vec2i(face->glyph->bitmap_left, face->glyph->bitmap_top);
+                character.advance = face->glyph->advance.x;                
+
+                m_FontCharacters.insert(std::pair<char, m_character>(c, character));
                 glBindTexture(GL_TEXTURE_2D, 0);
             }
         }
+
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 

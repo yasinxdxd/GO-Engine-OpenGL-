@@ -29,7 +29,7 @@ namespace go
 		virtual void draw(go::Vec2ui windowSize) override;
 
 	private:
-		go::Font* m_Font;
+		go::Font m_Font;
 		std::string m_string;
 
 	};
