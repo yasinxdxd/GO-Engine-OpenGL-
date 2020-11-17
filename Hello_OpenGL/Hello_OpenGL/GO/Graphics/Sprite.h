@@ -15,11 +15,14 @@ namespace go
 		Sprite(go::Texture& texture);
 		~Sprite();
 
-
+		//Setters:
 		void setTexture(Texture& texture);
 		void setPosition(Vec2f) override;
+		void setOrigin(Vec2f) override;
 		void setSize(Vec2f) override;
+		//Getters:
 		Vec2f getPosition() const override;
+		Vec2f getOrigin() const override;
 		Vec2f getSize() const override;
 	
 	

@@ -15,6 +15,13 @@ namespace go
 		setTexture(texture);
 	}
 
+
+	Sprite::~Sprite()
+	{
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glDeleteTextures(sizeof(GOuint), &m_Texture->m_texture);
+	}
+
 	//Setters:
 	void Sprite::setTexture(Texture& texture)
 	{
@@ -24,17 +31,14 @@ namespace go
 		m_defaultShader.setInt("texture1", 0);
 	}
 
-	Sprite::~Sprite()
-	{
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glDeleteTextures(sizeof(GOuint), &m_Texture->m_texture);
-	}
-
-
-
 	void Sprite::setPosition(Vec2f position)
 	{
 		m_position = position;
+	}
+
+	void Sprite::setOrigin(Vec2f origin)
+	{
+		m_origin = origin;
 	}
 
 	void Sprite::setSize(Vec2f size)
@@ -46,6 +50,11 @@ namespace go
 	Vec2f Sprite::getPosition() const
 	{
 		return m_position;
+	}
+
+	Vec2f Sprite::getOrigin() const
+	{
+		return m_origin;
 	}
 
 	Vec2f Sprite::getSize() const
@@ -61,6 +70,7 @@ namespace go
 		glBindTexture(GL_TEXTURE_2D, m_Texture->m_texture);
 		m_defaultShader.use();
 		m_defaultVertexArray.bind();
+		m_defaultVertexArray.unBind();
 		glBindTexture(GL_TEXTURE_2D, 0);
 		setShader();
 		//std::cout << "Sprite::draw()" << std::endl;

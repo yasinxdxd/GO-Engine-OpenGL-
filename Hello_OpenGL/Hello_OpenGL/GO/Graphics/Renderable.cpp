@@ -12,6 +12,11 @@ namespace go
 		m_position = position;
 	}
 
+	void Renderable::setOrigin(Vec2f origin)
+	{
+		m_origin = origin;
+	}
+
 	void Renderable::setSize(Vec2f size)
 	{
 		m_size = size;
@@ -21,6 +26,11 @@ namespace go
 	Vec2f Renderable::getPosition() const
 	{
 		return m_position;
+	}
+
+	Vec2f Renderable::getOrigin() const
+	{
+		return m_origin;
 	}
 
 	Vec2f Renderable::getSize() const
@@ -33,13 +43,14 @@ namespace go
 		m_windowSize = windowSize;
 		m_defaultShader.use();
 		m_defaultVertexArray.bind();
+		m_defaultVertexArray.unBind();
 		setShader();
 		//std::cout << "Renderable::draw()" << std::endl;
 	}
 
 	void Renderable::setShader()
 	{
-		m_defaultVertexArray.setVertices(m_position, m_size, m_windowSize);
+		m_defaultVertexArray.setVertices(m_origin, m_position, m_size, m_windowSize);
 	}
 
 }

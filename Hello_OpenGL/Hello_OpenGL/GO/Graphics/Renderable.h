@@ -15,9 +15,11 @@ namespace go
 		Renderable();
 		//Setters:
 		virtual void setPosition(Vec2f);
+		virtual void setOrigin(Vec2f);
 		virtual void setSize(Vec2f);
 		//Getters:
 		virtual Vec2f getPosition() const;
+		virtual Vec2f getOrigin() const;
 		virtual Vec2f getSize() const;
 
 	protected:
@@ -30,7 +32,7 @@ namespace go
 		Vec2ui m_windowSize;
 		Vec2f m_position;
 		Vec2f m_size;
-
+		Vec2f m_origin = Vec2f(0, 0);
 
 	friend class Window;
 	};
