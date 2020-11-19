@@ -2,14 +2,15 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Sprite.h"
 #include "Graphics/Text.h"
+#include "Input/Mouse.h"
 #include <chrono>
 #include <thread>
-#include <time.h>
+
 
 
 int main()
 {
-	go::Window window(go::Vec2ui(600, 400), "Window!!!");
+	go::Window window(go::Vec2ui(1280, 720), "Window!!!");
 	/*
 	go::texture2d tex;
 	try
@@ -22,54 +23,58 @@ int main()
 	}
 	*/
 
-	go::Texture texture("assets/woodyFloor.jpg");
+	go::Texture player_texture("assets/woodyFloor.jpg");
+	go::Sprite player_sprite(player_texture);
+	player_sprite.setSize(go::Vec2f(200, 200));
+	player_sprite.setColor(156,50,115);
+	float x1 = 600, y1 = 400;
+	
+
+	/*go::Texture texture("assets/woodyFloor.jpg");
 	go::Sprite sprite(texture);
-	sprite.setPosition(go::Vec2f(200, 320));
-	sprite.setSize(go::Vec2f(50, 50));
-
-	go::Texture t("assets/texture_sand.png");
-	go::Sprite s(t);
-	s.setPosition(go::Vec2f(0, 0));
-	s.setSize(go::Vec2f(200, 200));
-	float x1=0, y1=0, x2=200, y2=320;
+	sprite.setPosition(go::Vec2f(900, 600));
+	sprite.setSize(go::Vec2f(200, 200));
+	sprite.setOrigin(go::Vec2f(100, 100));*/
 
 
 
-
-	float FPS = 60.0;
-	float start, end, res, delay;
+	GOuint FPS = 60;
+	GOuint start, delta=1;
+	float delay;
 	
 	while (!window.isClose())
 	{
-		start = (float)glfwGetTime()*1000000;
+		start = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 		/////////////////////////////////////////////////////////////////////
 		window.pollEvent();
-		s.setPosition(go::Vec2f(x1, y1));
-		x1 += 2;
-		y1 += 2;
+		player_sprite.setPosition(go::Vec2f(x1, y1));
+		x1 += 8;
+		//y1 += 2;
+		if (x1 > window.getWidth())
+		{
+			x1 = -player_sprite.getSize().x;
+		}
 
-		x2--;
-		sprite.setPosition(go::Vec2f(x2, y2));
+
+		
+		std::cout << go::Mouse::getPosition().x << " , " << go::Mouse::getPosition().y << std::endl;
 
 
 		window.clear();
-		window.render(sprite);
-		window.render(s);
+		window.render(player_sprite);
+		//window.render(sprite);
 		window.display();
 
-
-		/////////////////////////////////////////////////////////////////////
-		end = (float)glfwGetTime()*1000000;
 		
-		res = end - start;
-		
-		delay = (1000000 / FPS) - res;
+		delay = (1000 / FPS) - delta;
 		if (delay > 0)
 		{
-			std::this_thread::sleep_for(std::chrono::microseconds((int(delay))));
-			std::cout << 1000000/res << std::endl;
+			std::this_thread::sleep_for(std::chrono::milliseconds((int(delay))));
+			//std::cout << 1000 / delta << std::endl;
 		}
-	
+
+		/////////////////////////////////////////////////////////////////////	
+		delta = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - start;
 	}
 	
 
