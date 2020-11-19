@@ -12,10 +12,10 @@ namespace go
 	class Texture
 	{
 	public:
-		Texture();
-		Texture(GOcchar* path_file);
+		explicit Texture();
+		explicit Texture(GOcchar* path_file);
 		~Texture();
-
+	public:
 		void loadFromFile(GOcchar* path_file);
 		
 	private:
@@ -24,7 +24,6 @@ namespace go
 			Vec2i size;
 			GOint channels;
 			GOuchar* data;
-
 		}textureData;
 
 		GOuint m_texture;
