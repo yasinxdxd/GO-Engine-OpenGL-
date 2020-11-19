@@ -15,8 +15,8 @@ namespace go
 	class Shader
 	{
 	public:
-		Shader();
-		Shader(GOcchar* vertex_path, GOcchar* frag_path);
+		explicit Shader();
+		explicit Shader(GOcchar* vertex_path, GOcchar* frag_path);
 		~Shader();
 		void use();
 	public:
