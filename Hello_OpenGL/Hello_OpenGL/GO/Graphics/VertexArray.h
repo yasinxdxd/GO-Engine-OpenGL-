@@ -11,23 +11,24 @@ namespace go
 	class VertexArray
 	{
 	public:
-		VertexArray();
+		explicit VertexArray();
 		~VertexArray();
 
 	protected:
 
-		void setVertices(go::Vec2f origin, go::Vec2f position, go::Vec2f size, go::Vec2ui windowsSize);
+		void setPositionVertices(go::Vec2f origin, go::Vec2f position, go::Vec2f size, go::Vec2ui windowsSize);
+		void setColorVertices(GOsint r, GOsint g, GOsint b, GOsint a, GOsint vertex);
 		void bind();
 		void unBind();
 
 	private:
 
-		GOfloat vertices[32] = {
-			// positions          // colors           // texture coords
-			-0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 1.0f, // top left 
-			 0.5f,  0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-			 0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 0.0f, // bottom right
-			-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 0.0f  // bottom left
+		GOfloat vertices[36] = {
+			// positions          // colors					// texture coords
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	0.0f, 1.0f, // top left 
+			 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	1.0f, 1.0f, // top right
+			 0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	1.0f, 0.0f, // bottom right
+			-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	0.0f, 0.0f  // bottom left
 		};
 
 
