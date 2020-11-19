@@ -10,5 +10,5 @@ uniform sampler2D texture1;
 void main()
 {
 	// multipling is for Coloring 
-	FragColor = texture(texture1, TexCoord);// *ourColor;
+	FragColor = texture(texture1, TexCoord) * ourColor;
 }
