@@ -1,5 +1,5 @@
 #include "Sprite.h"
-
+//#include <stdexcept>
 
 namespace go
 {
@@ -19,7 +19,6 @@ namespace go
 	Sprite::~Sprite()
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glDeleteTextures(sizeof(GOuint), &m_Texture->m_texture);
 	}
 
 	//Setters:
@@ -44,6 +43,24 @@ namespace go
 	void Sprite::setSize(Vec2f size)
 	{
 		m_size = size;
+	}
+
+	void Sprite::setColor(GOsint r, GOsint g, GOsint b)
+	{
+		//m_defaultShader.setFloat_4("ourColor", float(r / 255), float(g / 255), float(b / 255), float(a / 255));
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 0);
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 1);
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 2);
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 3);
+	}
+
+	void Sprite::setColor(GOsint r, GOsint g, GOsint b, GOsint a)
+	{
+		//m_defaultShader.setFloat_4("ourColor", float(r / 255), float(g / 255), float(b / 255), float(a / 255));
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 0);
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 1);
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 2);
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 3);
 	}
 
 	//Getters:

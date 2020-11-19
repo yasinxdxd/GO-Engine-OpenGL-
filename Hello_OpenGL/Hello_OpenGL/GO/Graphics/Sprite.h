@@ -11,8 +11,8 @@ namespace go
 	class Sprite : public go::Renderable
 	{
 	public:
-		Sprite();
-		Sprite(go::Texture& texture);
+		explicit Sprite();
+		explicit Sprite(go::Texture& texture);
 		~Sprite();
 
 		//Setters:
@@ -20,6 +20,8 @@ namespace go
 		void setPosition(Vec2f) override;
 		void setOrigin(Vec2f) override;
 		void setSize(Vec2f) override;
+		void setColor(GOsint r, GOsint g, GOsint b) override;
+		void setColor(GOsint r, GOsint g, GOsint b, GOsint a) override;
 		//Getters:
 		Vec2f getPosition() const override;
 		Vec2f getOrigin() const override;

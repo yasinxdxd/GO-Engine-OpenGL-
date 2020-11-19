@@ -22,6 +22,24 @@ namespace go
 		m_size = size;
 	}
 
+	void Renderable::setColor(GOsint r, GOsint g, GOsint b)
+	{
+		//m_defaultShader.setFloat_4("ourColor", float(r / 255), float(g / 255), float(b / 255), float(a / 255));
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 0);
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 1);
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 2);
+		m_defaultVertexArray.setColorVertices(r, g, b, 255, 3);
+	}
+
+	void Renderable::setColor(GOsint r, GOsint g, GOsint b, GOsint a)
+	{
+		//m_defaultShader.setFloat_4("ourColor", float(r / 255), float(g / 255), float(b / 255), float(a / 255));
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 0);
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 1);
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 2);
+		m_defaultVertexArray.setColorVertices(r, g, b, a, 3);
+	}
+
 	//Getters:
 	Vec2f Renderable::getPosition() const
 	{
@@ -50,7 +68,7 @@ namespace go
 
 	void Renderable::setShader()
 	{
-		m_defaultVertexArray.setVertices(m_origin, m_position, m_size, m_windowSize);
+		m_defaultVertexArray.setPositionVertices(m_origin, m_position, m_size, m_windowSize);
 	}
 
 }

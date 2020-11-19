@@ -12,11 +12,13 @@ namespace go
 	{
 
 	public:
-		Renderable();
+		explicit Renderable();
 		//Setters:
 		virtual void setPosition(Vec2f);
 		virtual void setOrigin(Vec2f);
 		virtual void setSize(Vec2f);
+		virtual void setColor(GOsint r, GOsint g, GOsint b);
+		virtual void setColor(GOsint r, GOsint g, GOsint b, GOsint a);
 		//Getters:
 		virtual Vec2f getPosition() const;
 		virtual Vec2f getOrigin() const;
@@ -33,6 +35,8 @@ namespace go
 		Vec2f m_position;
 		Vec2f m_size;
 		Vec2f m_origin = Vec2f(0, 0);
+	protected:
+		virtual Renderable& operator=(const Renderable&) = delete; //NON-COPYABLE
 
 	friend class Window;
 	};
