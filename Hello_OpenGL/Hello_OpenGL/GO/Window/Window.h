@@ -38,6 +38,7 @@ namespace go
 		//call backs:
 		static void frame_buffer_size_callback(GLFWwindow* window, GOint width, GOint height);
 		static void key_callback(GLFWwindow* window, GOint key, GOint scancode, GOint action, GOint mods);
+		static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 	private:
 		GLFWwindow* m_window;
 		Vec2ui m_size;

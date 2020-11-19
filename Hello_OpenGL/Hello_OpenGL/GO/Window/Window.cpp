@@ -1,4 +1,6 @@
 #include "Window/Window.h"
+#include "Input/Mouse.h"
+
 
 namespace go
 {
@@ -84,6 +86,8 @@ namespace go
 		m_close = (glfwWindowShouldClose(m_window)) ? true : false;
 		glfwSetFramebufferSizeCallback(m_window, frame_buffer_size_callback);
 		glfwSetKeyCallback(m_window, key_callback);
+		glfwSetCursorPosCallback(m_window, cursor_position_callback);
+		glfwGetCursorPos(m_window, &go::Mouse::m_position.x, &go::Mouse::m_position.y);
 	}
 
 	GObool Window::isClose() const { return m_close; }
@@ -113,6 +117,11 @@ namespace go
 	{
 		if (key == GLFW_KEY_E && action == GLFW_PRESS)
 			std::cout << "E" << std::endl;
+	}
+
+	void Window::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+	{
+
 	}
 
 }
