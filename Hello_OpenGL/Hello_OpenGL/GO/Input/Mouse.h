@@ -2,7 +2,7 @@
 #define GO_MOUSE_H
 
 
-#include "Window/Window.h"
+#include "Math/Vectors.h"
 
 
 namespace go
@@ -12,9 +12,10 @@ namespace go
 	{
 	public:
 		Mouse();
-		//inline static Vec2d& getPosition();
-		static inline go::Vec2d position;
-
+		static Vec2d& getPosition(void);
+	
+	private:
+		static inline go::Vec2d m_position;
 
 	friend class Window;
 	};

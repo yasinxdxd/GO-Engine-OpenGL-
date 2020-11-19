@@ -1,5 +1,4 @@
-#include "Input/Mouse.h"
-
+#include "Mouse.h"
 
 namespace go
 {
@@ -9,8 +8,8 @@ namespace go
         
     }
 
-   /* Vec2d& Mouse::getPosition()
+    Vec2d& Mouse::getPosition(void)
     {
         return m_position;
-    }*/
+    }
 }
