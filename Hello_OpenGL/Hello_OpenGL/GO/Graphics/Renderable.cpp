@@ -22,6 +22,11 @@ namespace go
 		m_size = size;
 	}
 
+	void Renderable::setRotatiton(GOfloat angle)
+	{
+		m_angle = angle;
+	}
+
 	void Renderable::setColor(GOsint r, GOsint g, GOsint b)
 	{
 		//m_defaultShader.setFloat_4("ourColor", float(r / 255), float(g / 255), float(b / 255), float(a / 255));
@@ -56,6 +61,11 @@ namespace go
 		return m_size;
 	}
 
+	GOfloat Renderable::getRotatiton() const
+	{
+		return m_angle;
+	}
+
 	void Renderable::draw(go::Vec2ui windowSize)
 	{
 		m_windowSize = windowSize;
@@ -68,7 +78,7 @@ namespace go
 
 	void Renderable::setShader()
 	{
-		m_defaultVertexArray.setPositionVertices(m_origin, m_position, m_size, m_windowSize);
+		m_defaultVertexArray.setPositionAndRotationVertices(m_origin, m_position, m_size, m_windowSize, m_angle);
 	}
 
 }

@@ -20,12 +20,14 @@ namespace go
 		void setPosition(Vec2f) override;
 		void setOrigin(Vec2f) override;
 		void setSize(Vec2f) override;
+		void setRotatiton(GOfloat angle) override;
 		void setColor(GOsint r, GOsint g, GOsint b) override;
 		void setColor(GOsint r, GOsint g, GOsint b, GOsint a) override;
 		//Getters:
 		Vec2f getPosition() const override;
 		Vec2f getOrigin() const override;
 		Vec2f getSize() const override;
+		GOfloat getRotatiton() const override;
 	
 	
 	private:
