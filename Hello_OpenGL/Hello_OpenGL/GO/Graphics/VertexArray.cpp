@@ -1,5 +1,6 @@
 #include "VertexArray.h"
 #include <glad/glad.h>
+#include "Math/Vectors.h"
 namespace go
 {
 	VertexArray::VertexArray()
@@ -47,12 +48,15 @@ namespace go
 		glDeleteBuffers(1, &EBO);
 	}
 
-	void VertexArray::setPositionVertices(go::Vec2f origin, go::Vec2f position, go::Vec2f size, go::Vec2ui windowSize)
+	void VertexArray::setPositionAndRotationVertices(go::Vec2f origin, go::Vec2f position, go::Vec2f size, go::Vec2ui windowSize, GOfloat angle)
 	{
-		vertices[0] = (-origin.x + position.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[1] = (-origin.y + position.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
-		vertices[9] = (-origin.x + position.x + size.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);		vertices[10] = (-origin.y + position.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
-		vertices[18] = (-origin.x + position.x + size.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);		vertices[19] = (-origin.y + position.y + size.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
-		vertices[27] = (-origin.x + position.x - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);				vertices[28] = (-origin.y + position.y + size.y - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		//X:																																	//Y:
+		vertices[0] = (position.x - origin.x + (size.x - origin.x) * cos(GO_D2R(angle+90)) - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[1] = (position.y - origin.y + (size.y - origin.y) * sin(GO_D2R(angle+90)) - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		vertices[9] = (position.x - origin.x + (size.x - origin.x) * cos(GO_D2R(angle+360)) - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[10] = (position.y - origin.y + (size.y - origin.y) * sin(GO_D2R(angle+360)) - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		vertices[18] = (position.x - origin.x + (size.x - origin.x) * cos(GO_D2R(angle+270)) - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[19] = (position.y - origin.y + (size.y - origin.y) * sin(GO_D2R(angle+270)) - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		vertices[27] = (position.x - origin.x + (size.x - origin.x) * cos(GO_D2R(angle+180)) - ((GOfloat)windowSize.x / 2)) / ((GOfloat)windowSize.x / 2);					vertices[28] = (position.y - origin.y + (size.y - origin.y) * sin(GO_D2R(angle+180)) - ((GOfloat)windowSize.y / 2)) / -((GOfloat)windowSize.y / 2);
+		
+		
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
