@@ -1,7 +1,6 @@
 #ifndef GO_MOUSE_H
 #define GO_MOUSE_H
 
-
 #include "Math/Vectors.h"
 #include "GLFW/glfw3.h"
 
@@ -20,7 +19,6 @@ namespace go
 		static GObool isMousePressed(go::Mouse::MouseButton);
 	
 
-
 	private:
 		//returning values
 		static inline GObool is_mouse_pressed; //static GObool isMousePressed(go::Mouse::MouseButton);
@@ -36,13 +34,9 @@ namespace go
 		static void mouse_button_callback(GLFWwindow* window, GOint button, GOint action, GOint mods);
 
 
-
 	friend class Window;
-	//friend class WindowEvent;
 	};
 
 }
 
-
-
-#endif
+#endif //GO_MOUSE_H

@@ -1,7 +1,16 @@
 #pragma once
 #ifndef GO_VECTORS_H
 #define GO_VECTORS_H
+
+#include <cmath>
 #include "Core/Definitions.h"
+
+#define GO_PI 3.14159265359
+#define GO_R2D(radian) radian * 180 / GO_PI
+#define GO_D2R(degree) degree * GO_PI / 180 
+#define GO_DIST(x1,y1,x2,y2) sqrt(((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2)))
+
+
 
 namespace go
 {
@@ -16,6 +25,45 @@ namespace go
 		Vec2() { this->x = 0; this->y = 0; }
 
 		Vec2(T x, T y) { this->x = x; this->y = y; }
+
+		Vec2<T> operator+(Vec2<T> v) const
+		{
+			Vec2<T> result = go::Vec2<T>(this->x + v.x, this->y + v.y);
+			return result;
+		}
+
+		Vec2<T> operator-(Vec2<T> v) const
+		{
+			Vec2<T> result = go::Vec2<T>(this->x - v.x, this->y - v.y);
+			return result;
+		}
+
+		template<typename N>
+		Vec2<T> operator*(N n) const
+		{
+			Vec2<T> result = go::Vec2<T>(this->x*n, this->y*n);
+			return result;
+		}
+
+		Vec2<T> operator+=(Vec2<T> v) 
+		{
+			*this = *this + v;
+			return *this;
+		}
+
+		Vec2<T> operator-=(Vec2<T> v) 
+		{
+			*this = *this - v;
+			return *this;
+		}
+
+		template<typename N>
+		Vec2<T> operator*=(N n) 
+		{
+			*this = *this * n;
+			return *this;
+		}
+
 
 	};
 
