@@ -3,8 +3,8 @@
 
 #include "Math/Vectors.h"
 #include "Graphics/Renderable.h"
-#include <GLFW/glfw3.h>
-#include <glad/glad.h>
+#include "Window/WindowEvent.h"
+#include "GUI/GUI.h"
 #include <iostream>
 #include <string>
 
@@ -28,6 +28,7 @@ namespace go
 		void pollEvent();
 		GObool isClose() const;
 		void clear();
+		void clear(GOsint r, GOsint g, GOsint b);
 		void render(go::Renderable&);
 		void display();
 
@@ -35,10 +36,8 @@ namespace go
 		GObool Init();
 
 	private:
-		//call backs:
-		static void frame_buffer_size_callback(GLFWwindow* window, GOint width, GOint height);
-		static void key_callback(GLFWwindow* window, GOint key, GOint scancode, GOint action, GOint mods);
-		static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+		
+
 	private:
 		GLFWwindow* m_window;
 		Vec2ui m_size;
@@ -47,6 +46,9 @@ namespace go
 		GObool m_close;
 		GOfloat m_aspectRatio;
 		GOsint m_FPS;
+	
+		
+	friend class GUI;
 	};
 
 }

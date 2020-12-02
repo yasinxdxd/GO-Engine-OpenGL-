@@ -1,5 +1,6 @@
 #include "Window/Window.h"
 #include "Input/Mouse.h"
+#include "Input/Keyboard.h"
 
 
 namespace go
@@ -84,44 +85,43 @@ namespace go
 	{
 		glfwPollEvents();
 		m_close = (glfwWindowShouldClose(m_window)) ? true : false;
-		glfwSetFramebufferSizeCallback(m_window, frame_buffer_size_callback);
-		glfwSetKeyCallback(m_window, key_callback);
-		glfwSetCursorPosCallback(m_window, cursor_position_callback);
+		
+		glfwSetFramebufferSizeCallback(m_window, WindowEvent::frame_buffer_size_callback);
+		
+		glfwSetKeyCallback(m_window, go::Keyboard::key_callback);
+		
+		//glfwSetInputMode(m_window, GLFW_STICKY_MOUSE_BUTTONS, GLFW_FALSE);//GLFW_TRUE
+		glfwSetCursorPosCallback(m_window, Mouse::cursor_position_callback);
 		glfwGetCursorPos(m_window, &go::Mouse::m_position.x, &go::Mouse::m_position.y);
+		glfwSetMouseButtonCallback(m_window, Mouse::mouse_button_callback);
 	}
 
-	GObool Window::isClose() const { return m_close; }
+	GObool Window::isClose() const 
+	{ return m_close; }
 
 	void Window::clear()
 	{
-		glClearColor(1, 0.2, 1, 0);
+		glClearColor(0, 0, 0, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
+
+	void Window::clear(GOsint r, GOsint g, GOsint b)
+	{
+		glClearColor((GOfloat)r/255, (GOfloat)g / 255, (GOfloat)b / 255, 0);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
 	void Window::render(go::Renderable& renderable)
 	{
 		renderable.draw(m_size);
 	}
+
 	void Window::display()
 	{
 		glfwSwapBuffers(m_window);
 	}
 
 
-	//call backs:
-	void Window::frame_buffer_size_callback(GLFWwindow* window, GOint width, GOint height)
-	{
-		glViewport(0, 0, width, height);
-	}
-
-	void Window::key_callback(GLFWwindow* window, GOint key, GOint scancode, GOint action, GOint mods)
-	{
-		if (key == GLFW_KEY_E && action == GLFW_PRESS)
-			std::cout << "E" << std::endl;
-	}
-
-	void Window::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
-	{
-
-	}
+	
 
 }
