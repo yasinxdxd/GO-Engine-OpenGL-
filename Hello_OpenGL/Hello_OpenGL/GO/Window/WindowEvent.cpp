@@ -10,12 +10,6 @@ namespace go
 		glViewport(0, 0, width, height);
 	}
 
-	void WindowEvent::key_callback(GLFWwindow* window, GOint key, GOint scancode, GOint action, GOint mods)
-	{
-		if (key == GLFW_KEY_E && action == GLFW_PRESS)
-			std::cout << "E" << std::endl;
-	}
-
 	
 
 

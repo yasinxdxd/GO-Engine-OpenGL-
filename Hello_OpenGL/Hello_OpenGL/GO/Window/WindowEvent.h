@@ -12,10 +12,6 @@ namespace go
 
 		//call backs:
 		static void frame_buffer_size_callback(GLFWwindow* window, GOint width, GOint height);
-		static void key_callback(GLFWwindow* window, GOint key, GOint scancode, GOint action, GOint mods);
-		
-
-
 
 	public:
 		
