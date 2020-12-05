@@ -37,7 +37,7 @@ namespace go
 			std::cerr << "GLFW could not initialize!" << std::endl;
 			return false;
 		}
-
+		
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -78,6 +78,26 @@ namespace go
 	GOuint Window::getWidth() const { return m_size.x; }
 	GOuint Window::getHeight() const { return m_size.y; }
 
+	Vec3si Window::getColor() const
+	{
+		return m_colors;
+	}
+
+	GOfloat Window::getFPS() const
+	{
+		return m_FPS;
+	}
+
+	void Window::setFPS(GOfloat FPS)
+	{
+		m_FPS = FPS;
+	}
+
+	void Window::setColor(go::Vec3si color)
+	{
+		m_colors = color;
+	}
+
 	//Setters:
 
 	//Others:
@@ -99,15 +119,10 @@ namespace go
 	GObool Window::isClose() const 
 	{ return m_close; }
 
+
 	void Window::clear()
 	{
-		glClearColor(0, 0, 0, 0);
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-
-	void Window::clear(GOsint r, GOsint g, GOsint b)
-	{
-		glClearColor((GOfloat)r/255, (GOfloat)g / 255, (GOfloat)b / 255, 0);
+		glClearColor((GOfloat)m_colors.x/255, (GOfloat)m_colors.y / 255, (GOfloat)m_colors.z / 255, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 

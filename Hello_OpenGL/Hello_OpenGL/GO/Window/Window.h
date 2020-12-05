@@ -21,14 +21,16 @@ namespace go
 		//Getters:
 		GOuint getWidth() const;
 		GOuint getHeight() const;
+		Vec3si getColor() const;
+		GOfloat getFPS() const;
 		//Setters:
-		void setFPS();
+		void setFPS(GOfloat FPS);
+		void setColor(go::Vec3si);
 
 		//Others:
 		void pollEvent();
 		GObool isClose() const;
 		void clear();
-		void clear(GOsint r, GOsint g, GOsint b);
 		void render(go::Renderable&);
 		void display();
 
@@ -36,7 +38,7 @@ namespace go
 		GObool Init();
 
 	private:
-		
+		go::Vec3si m_colors;
 
 	private:
 		GLFWwindow* m_window;
@@ -45,7 +47,7 @@ namespace go
 	private:
 		GObool m_close;
 		GOfloat m_aspectRatio;
-		GOsint m_FPS;
+		GOfloat m_FPS;
 	
 		
 	friend class GUI;
