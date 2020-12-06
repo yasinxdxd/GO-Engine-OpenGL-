@@ -16,6 +16,8 @@ namespace go
 	public:
 		//setters:
 		void setSoundBuffer(go::SoundBuffer& soundBuffer);
+		void play();
+		void stop();
 
 		//getters:
 		SoundBuffer getSoundBuffer() const;
