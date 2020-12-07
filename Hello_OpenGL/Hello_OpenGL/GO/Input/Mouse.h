@@ -10,14 +10,19 @@ namespace go
 	class Mouse
 	{
 	public:
+		Mouse() = delete;
+	
+	public:	
 		enum MouseButton
 		{ Left, Right };
 
 	public:
-		Mouse();
 		static Vec2d& getPosition(void);
 		static GObool isMousePressed(go::Mouse::MouseButton);
+		static GObool isMouseReleased(go::Mouse::MouseButton);
 	
+	private:
+		
 
 	private:
 		//returning values

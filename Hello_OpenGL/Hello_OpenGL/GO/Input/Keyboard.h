@@ -10,6 +10,8 @@ namespace go
 	class Keyboard
 	{
 	public:
+		Keyboard() = delete;
+	public:
 		enum Key
 		{
 			SPACE = 32,
@@ -140,9 +142,6 @@ namespace go
 
 	public:
 		static GObool isKeyPressed(go::Keyboard::Key);
-
-	private:
-		Keyboard();
 
 	private:
 		//returning values
