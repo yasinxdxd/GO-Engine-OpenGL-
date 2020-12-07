@@ -102,6 +102,8 @@ namespace go
 	typedef Vec3<GOfloat> Vec3f;
 	typedef Vec3<GOint> Vec3i;
 
+	typedef Vec3<GOsint> Vec3si;
+
 	typedef Vec4<GOuint> Vec4ui;
 	typedef Vec4<GOfloat> Vec4f;
 	typedef Vec4<GOint> Vec4i;
