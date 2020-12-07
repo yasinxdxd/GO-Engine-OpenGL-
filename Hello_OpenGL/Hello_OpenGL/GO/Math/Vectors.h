@@ -78,6 +78,44 @@ namespace go
 
 		Vec3(T x, T y, T z) { this->x = x; this->y = y; this->z = z; }
 
+		Vec3<T> operator+(Vec3<T> v) const
+		{
+			Vec3<T> result = go::Vec3<T>(this->x + v.x, this->y + v.y, this->z + v.z);
+			return result;
+		}
+
+		Vec3<T> operator-(Vec2<T> v) const
+		{
+			Vec3<T> result = go::Vec3<T>(this->x - v.x, this->y - v.y, this->z - v.z);
+			return result;
+		}
+
+		template<typename N>
+		Vec3<T> operator*(N n) const
+		{
+			Vec3<T> result = go::Vec3<T>(this->x * n, this->y * n, this->z * n);
+			return result;
+		}
+
+		Vec3<T> operator+=(Vec3<T> v)
+		{
+			*this = *this + v;
+			return *this;
+		}
+
+		Vec3<T> operator-=(Vec3<T> v)
+		{
+			*this = *this - v;
+			return *this;
+		}
+
+		template<typename N>
+		Vec3<T> operator*=(N n)
+		{
+			*this = *this * n;
+			return *this;
+		}
+
 	};
 
 	template<class T>
