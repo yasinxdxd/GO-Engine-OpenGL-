@@ -17,6 +17,7 @@ namespace go
 		~Texture();
 	public:
 		void loadFromFile(GOcchar* path_file);
+		void loadFromMemory();
 		
 	private:
 		struct textureData

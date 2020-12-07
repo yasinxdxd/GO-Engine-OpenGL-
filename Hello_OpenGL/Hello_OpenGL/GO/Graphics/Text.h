@@ -10,10 +10,10 @@ namespace go
 	class Text : public go::Renderable
 	{
 	public:
-		Text();
-		Text(GOcchar* text);
-		Text(go::Font& font);
-		Text(GOcchar* text, go::Font& font);
+		explicit Text();
+		explicit Text(GOcchar* text);
+		explicit Text(go::Font& font);
+		explicit Text(GOcchar* text, go::Font& font);
 		~Text();
 
 

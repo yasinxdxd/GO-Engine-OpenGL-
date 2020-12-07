@@ -36,7 +36,8 @@ namespace go
 		Vec2ui m_windowSize;
 		Vec2f m_position;
 		Vec2f m_size;
-		Vec2f m_origin = Vec2f(0, 0);
+		Vec2f m_origin;
+
 		GOfloat m_angle = 0;
 	protected:
 		virtual Renderable& operator=(const Renderable&) = delete; //NON-COPYABLE

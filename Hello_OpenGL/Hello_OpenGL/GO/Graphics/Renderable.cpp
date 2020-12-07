@@ -3,8 +3,11 @@
 namespace go
 {
 
-	Renderable::Renderable()
-	{ }
+	Renderable::Renderable():
+		m_position(Vec2f(0, 0)), m_origin(Vec2f(0, 0))
+	{ 
+		m_defaultShader.setVertexAndFragment("GO/GLSL/VertexShader.glsl", "GO/GLSL/FragmentShader.glsl");
+	}
 
 	//Setters:
 	void Renderable::setPosition(Vec2f position)
@@ -29,7 +32,7 @@ namespace go
 
 	void Renderable::setColor(GOsint r, GOsint g, GOsint b)
 	{
-		//m_defaultShader.setFloat_4("ourColor", float(r / 255), float(g / 255), float(b / 255), float(a / 255));
+		//m_defaultShader.setFloat_3("ourColor", float(r / 255), float(g / 255), float(b / 255));
 		m_defaultVertexArray.setColorVertices(r, g, b, 255, 0);
 		m_defaultVertexArray.setColorVertices(r, g, b, 255, 1);
 		m_defaultVertexArray.setColorVertices(r, g, b, 255, 2);

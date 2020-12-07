@@ -1,5 +1,6 @@
 #include "Texture.h"
 #include "stb_image.h"
+#include <fstream>
 namespace go
 {
 	Texture::Texture()
@@ -66,5 +67,22 @@ namespace go
 		stbi_image_free(textureData.data);
 	}
 
+	/*void Texture::loadFromMemory(unsigned GOcchar* path_file)
+	{
+		std::ifstream in_file(path_file, std::ios::binary);
+		in_file.seekg(0, std::ios::end);
+		int file_size = in_file.tellg();
 
+		textureData.data = stbi_load_from_memory(path_file, file_size, &textureData.size.x, &textureData.size.y, &textureData.channels, STBI_rgb_alpha);
+		if (stbi_failure_reason())
+			std::cout << "stbi failure reason: " << stbi_failure_reason() << std::endl;
+		if (textureData.data)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureData.size.x, textureData.size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData.data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+			std::cout << "Image couldn't loaded: " << path_file << std::endl;
+		stbi_image_free(textureData.data);
+	}*/
 }

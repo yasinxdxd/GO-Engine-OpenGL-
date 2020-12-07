@@ -11,7 +11,9 @@ namespace go
 		{
 			std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
 		}
-
+        
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	Font::Font(GOcchar* path_file)
@@ -20,6 +22,9 @@ namespace go
 		{
 			std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
 		}
+        
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         loadFromFile(path_file);
 	}
 
@@ -61,7 +66,7 @@ namespace go
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                 ////////////////////////////////////////////////////////////////////
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width, face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
-                //glGenerateMipmap(GL_TEXTURE_2D);
+                glGenerateMipmap(GL_TEXTURE_2D);
                 ////////////////////////////////////////////////////////////////////
                 
                 character.size = go::Vec2i(face->glyph->bitmap.width, face->glyph->bitmap.rows);
@@ -75,9 +80,6 @@ namespace go
 
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
-
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 

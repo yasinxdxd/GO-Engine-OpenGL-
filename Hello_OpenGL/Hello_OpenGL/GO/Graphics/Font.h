@@ -9,23 +9,25 @@
 namespace go
 {
 
+	struct m_character
+	{
+		GOuint m_texture;	 // ID handle of the glyph texture
+		go::Vec2i size;      // Size of glyph
+		go::Vec2i bearing;   // Offset from baseline to left/top of glyph
+		GOuint advance;		 // Horizontal offset to advance to next glyph
+	};
+
 	class Font
 	{
 	public:
-		Font();
-		Font(GOcchar* path_file);
+		explicit Font();
+		explicit Font(GOcchar* path_file);
 		~Font();
 
 		void loadFromFile(GOcchar* path_file);
 
 	private:
-		struct m_character 
-		{
-			GOuint m_texture;	 // ID handle of the glyph texture
-			go::Vec2i size;      // Size of glyph
-			go::Vec2i bearing;   // Offset from baseline to left/top of glyph
-			GOuint advance;		 // Horizontal offset to advance to next glyph
-		};
+		
 
 	private:
 		FT_Library ft;
