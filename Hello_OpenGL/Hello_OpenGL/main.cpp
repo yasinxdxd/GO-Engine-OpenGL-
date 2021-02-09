@@ -1,142 +1,234 @@
-/*----------------------------------*//*
-#include "Core/Definitions.h"
-#include "Window/Window.h"
-#include "Graphics/Shader.h"
-#include "Graphics/Sprite.h"
-#include "Graphics/Text.h"
-#include "Input/Mouse.h"
-#include "Input/Keyboard.h"
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MIT License
+Copyright (c) 2020 Muhammed Yasinhan Yaþar
 
-#include "GUI/GUI.h"
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, 
+including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, 
+subject to the following conditions:
 
-#include <chrono>
-#include <thread>
-#include <exception>
-*/
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-/*----------------------------------*/
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+//#include "PerlinNoise.h"
 #include "Core/Application.h"
-//#include "Utils/Utils.h"
-/*----------------------------------*/
 
-struct MyApp : public go::Application
+struct Animation
 {
-
-	go::Texture* texture;
-	go::Sprite* sprite;
-	go::SoundBuffer* buff;
-	go::SoundSource* sound;
-	go::Vec2f speed;
-	go::Vec2f acc;
-	float angle;
-
-	ALCdevice* device;
-	ALCcontext* context;
-
-	void Start() override
+	Animation(int row_count, int column_count)
 	{
-		device = alcOpenDevice(NULL);
-		if (!device)
-		{
-			std::cout << "Cannot Initiliaze the Device." << std::endl;
-			return;
-		}
-
-		context = alcCreateContext(device, NULL);
-		if (!context)
-		{
-			std::cout << "Cannot Initiliaze the Context." << std::endl;
-			return;
-		}
-		alcMakeContextCurrent(context);
-
-		buff = new go::SoundBuffer();
-		buff->loadFromFile("sounds/canary.wav");
-		sound = new go::SoundSource();
-		sound->setSoundBuffer(*buff);
-		
-		sound->play();
-
-		//std::this_thread::sleep_for(std::chrono::milliseconds((int(1000))));
-
-		window = new go::Window(go::Vec2ui(800,600),"MyApp");
-		texture = new go::Texture();
-		sprite = new go::Sprite();
-
-		window->setColor(go::Vec3si(16,121,121));
-		window->setFPS(60);
-
-		texture->loadFromFile("assets/settings.png");
-		
-		sprite->setTexture(*texture);
-		sprite->setPosition(go::Vec2f(window->getWidth() / 2, window->getHeight() / 2));
-		sprite->setSize(go::Vec2f(256, 256));
-		sprite->setOrigin(go::Vec2f(sprite->getSize().x / 2, sprite->getSize().y / 2));
-		
-		speed = go::Vec2f(0, 0);
-		acc = go::Vec2f(0, .095);
-		angle = 0;
-
+		m_row_count = row_count;
+		m_column_count = column_count;
+		frame_count = row_count * column_count;
 	}
-
-	void Update() override
+	~Animation() {}
+	void animate(go::Sprite& sprite)
 	{
-		angle += 0.01;
-		sprite->setRotatiton(angle);
-		sprite->setSize(go::Vec2f(256, 256));
-		sprite->setOrigin(go::Vec2f(sprite->getSize().x / 2, sprite->getSize().y / 2));
+		frame_size.x = sprite.getSize().x / m_column_count;
+		frame_size.y = sprite.getSize().y / m_row_count;
+		sprite.setTextureCoords(frame_pos / sprite.getSize(), frame_size / sprite.getSize());
+		sprite.setSize(frame_size);
 
-		sprite->setPosition(sprite->getPosition() + speed);
-		if (sprite->getPosition().y + sprite->getSize().y / 2 < window->getHeight())
-		{
-			speed = speed + acc;
-			
-		}
+		if (frame.x <= m_column_count)
+			frame_pos.x += frame_size.x;
 		else
 		{
-			speed = speed * -0.89454678;
-			//sound->stop();
+			frame.x = 0;
+			if(frame.y <= m_row_count)
+				frame_pos.y += frame_size.y;
+			else
+				frame.y = 0;
 		}
-
-		if (go::Mouse::isMousePressed(go::Mouse::MouseButton::Left))
-		{
-			std::cout << "jump" << std::endl;
-			speed.y = -4;
-		}
-		
+		//std::cout << frame_size.x << std::endl;
 	}
 
-	void Draw() override
-	{
-		window->render(*sprite);
-	}
-
-	void Destroy() override
-	{
-		delete window;
-		delete texture;
-		delete sprite;
-		delete buff;
-		delete sound;
-
-
-		alcDestroyContext(context);
-		alcCloseDevice(device);
-	}
+	go::Vec2i frame;
+	go::Vec2f frame_size;
+	go::Vec2f frame_pos;
+	int frame_count;
+	int m_column_count;
+	int m_row_count;
 };
+
+
+
+class Player
+{
+public:
+	Player():
+		pos(go::Vec2f(120, 120)), 
+		size(go::Vec2f(768, 64)),
+		run(1, 8)
+	{
+		m_texture.loadFromFile("assets/Knight/noBKG_KnightRun_strip.png");
+		m_sprite.setTexture(m_texture);
+		m_sprite.setPosition(pos);
+		m_sprite.setSize(size);
+		m_sprite.setTextureCoords(go::Vec2f(0, 0), go::Vec2f(1, 1));
+		vel.x = 16;
+	}
+	
+	~Player()
+	{
+
+	}
+
+	void update()
+	{
+		m_sprite.setSize(size*4);
+		run.animate(m_sprite);
+		m_sprite.setPosition(pos);
+		pos += vel;
+		if (pos.x > 650)
+			pos.x = -250;
+	}
+
+	void show(go::Window* window)
+	{
+		window->render(m_sprite);
+	}
+
+private:
+	go::Vec2f pos;
+	go::Vec2f vel;
+	go::Vec2f size;
+	go::Sprite m_sprite;
+	go::Texture m_texture;
+	Animation run;
+};
+
+
+
+
+
 
 
 int main(int, char**)
 {
-	MyApp app;
-	app.GO();
-	
-	
+	go::Window* window = new go::Window(800, 600, "Horse!");
+	window->setFPS(6);
+	window->setColor(go::Vec3si(200, 200, 123));
+	Player player;
 
-	//TO DO: data is going to be member of SoundBuffer. 
+	while (!window->isClose())
+	{
+		window->pollEvent();
 
-	return 0;
+		player.update();
+
+		window->clear();
+		player.show(window);
+		window->display();
+	}
+	
+	delete window;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+	go::SoundBuffer* buff;
+	go::SoundSource* sound;
+	ALCdevice* device;
+	ALCcontext* context;
+
+	device = alcOpenDevice(NULL);
+	if (!device)
+	{
+		std::cout << "Cannot Initiliaze the Device." << std::endl;
+		return 0;
+	}
+
+	context = alcCreateContext(device, NULL);
+	if (!context)
+	{
+		std::cout << "Cannot Initiliaze the Context." << std::endl;
+		return 0;
+	}
+	alcMakeContextCurrent(context);
+
+	buff = new go::SoundBuffer();
+	buff->loadFromFile("sounds/canary.wav");
+	sound = new go::SoundSource();
+	sound->setSoundBuffer(*buff);
+	sound->setLoop(true);
+
+	//sound->play();
+
+
+	go::Window window(go::Vec2ui(1920, 1080), "Window!!!");
+	window.setColor(go::Vec3si(200, 50, 50));
+
+	try
+	{
+		go::GUI::getInstance()->Init(window);
+	}
+	catch (std::exception e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	int scale = 1;
+	float sliderfloatX = 256;
+	float sliderfloatY = 256;
+
+
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	delete buff;
+	delete sound;
+
+
+	alcDestroyContext(context);
+	alcCloseDevice(device);
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //
