@@ -18,6 +18,9 @@ namespace go
 	public:
 		void loadFromFile(GOcchar* path_file);
 		void loadFromMemory();
+
+	public:
+		operator GOuint () const noexcept;
 		
 	private:
 		struct textureData

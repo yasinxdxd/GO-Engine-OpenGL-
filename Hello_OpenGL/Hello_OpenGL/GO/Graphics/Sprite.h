@@ -18,6 +18,7 @@ namespace go
 		//Setters:
 		void setTexture(Texture& texture);
 		void setPosition(Vec2f) override;
+		void setTextureCoords(Vec2f, Vec2f) override;
 		void setOrigin(Vec2f) override;
 		void setSize(Vec2f) override;
 		void setRotatiton(GOfloat angle) override;

@@ -84,6 +84,15 @@ namespace go
 
 	}
 
+	void VertexArray::setTextureCoords(go::Vec2f position, go::Vec2f size)
+	{
+		vertices[7] = position.x;			vertices[8] = position.y;
+		vertices[16] = position.x + size.x; vertices[17] = position.y;
+		vertices[25] = position.x + size.x; vertices[26] = position.y - size.y;
+		vertices[34] = position.x;			vertices[35] = position.y - size.y;
+		
+	}
+
 	void VertexArray::setColorVertices(GOsint r, GOsint g, GOsint b, GOsint a, GOsint vertex)
 	{
 		switch (vertex)

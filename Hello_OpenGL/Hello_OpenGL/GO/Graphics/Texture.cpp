@@ -67,6 +67,11 @@ namespace go
 		stbi_image_free(textureData.data);
 	}
 
+	Texture::operator GOuint() const noexcept
+	{
+		return m_texture;
+	}
+
 	/*void Texture::loadFromMemory(unsigned GOcchar* path_file)
 	{
 		std::ifstream in_file(path_file, std::ios::binary);
@@ -85,4 +90,6 @@ namespace go
 			std::cout << "Image couldn't loaded: " << path_file << std::endl;
 		stbi_image_free(textureData.data);
 	}*/
+
+
 }

@@ -18,6 +18,7 @@ namespace go
 
 		//void setPositionVertices(go::Vec2f origin, go::Vec2f position, go::Vec2f size, go::Vec2ui windowsSize);
 		void setPositionAndRotationVertices(go::Vec2f origin, go::Vec2f position, go::Vec2f size, go::Vec2ui windowsSize, GOfloat angle);
+		void setTextureCoords(go::Vec2f position, go::Vec2f size);
 		void setColorVertices(GOsint r, GOsint g, GOsint b, GOsint a, GOsint vertex);
 		void bind();
 		void unBind();
@@ -26,10 +27,10 @@ namespace go
 
 		GOfloat vertices[36] = {
 			// positions          // colors					// texture coords
-			-0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	0.0f, 1.0f, // top left 
-			 0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	1.0f, 1.0f, // top right
-			 0.0f, -0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	1.0f, 0.0f, // bottom right
-			-0.0f, -0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	0.0f, 0.0f  // bottom left
+			-0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	0.0f, 0.0f, // top left 
+			 0.0f,  0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	1.0f, 0.0f, // top right
+			 0.0f, -0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	1.0f, 1.0f, // bottom right
+			-0.0f, -0.0f, 0.0f,   1.0f, 1.0f, 1.0f,	1.0f,	0.0f, 1.0f  // bottom left
 		};
 
 

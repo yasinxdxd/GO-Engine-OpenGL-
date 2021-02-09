@@ -15,6 +15,7 @@ namespace go
 		explicit Renderable();
 		//Setters:
 		virtual void setPosition(Vec2f);
+		virtual void setTextureCoords(Vec2f, Vec2f);
 		virtual void setOrigin(Vec2f);
 		virtual void setSize(Vec2f);
 		virtual void setRotatiton(GOfloat angle);

@@ -35,6 +35,11 @@ namespace go
 		m_position = position;
 	}
 
+	void Sprite::setTextureCoords(Vec2f position, Vec2f size)
+	{
+		m_defaultVertexArray.setTextureCoords(position, size);
+	}
+
 	void Sprite::setOrigin(Vec2f origin)
 	{
 		m_origin = origin;
@@ -94,7 +99,7 @@ namespace go
 	{
 		m_windowSize = windowSize;
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, m_Texture->m_texture);
+		glBindTexture(GL_TEXTURE_2D, *m_Texture);
 		m_defaultShader.use();
 		m_defaultVertexArray.bind();
 		m_defaultVertexArray.unBind();

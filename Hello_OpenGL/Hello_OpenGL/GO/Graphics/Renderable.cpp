@@ -15,6 +15,11 @@ namespace go
 		m_position = position;
 	}
 
+	void Renderable::setTextureCoords(Vec2f position, Vec2f size)
+	{
+		m_defaultVertexArray.setTextureCoords(position, size);
+	}
+
 	void Renderable::setOrigin(Vec2f origin)
 	{
 		m_origin = origin;
