@@ -8,6 +8,8 @@
 #include <iostream>
 #include <string>
 
+struct GLFWWindow;
+
 namespace go
 {
 	class Window
@@ -33,6 +35,8 @@ namespace go
 		void clear();
 		void render(go::Renderable&);
 		void display();
+
+		operator GLFWwindow*() { return m_window; }
 
 	private:
 		GObool Init();
