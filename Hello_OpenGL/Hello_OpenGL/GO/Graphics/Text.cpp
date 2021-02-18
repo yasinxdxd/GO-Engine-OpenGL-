@@ -25,7 +25,7 @@ namespace go
 	Text::~Text()
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
-		for(int i = 0; i< m_Font.m_FontCharacters.size(); i++)
+		for(GOuint i = 0; i< m_Font.m_FontCharacters.size(); i++)
 			glDeleteTextures(sizeof(GOuint), &m_Font.m_FontCharacters[i].m_texture);
 	}
 	void Text::setFont(go::Font& font)
