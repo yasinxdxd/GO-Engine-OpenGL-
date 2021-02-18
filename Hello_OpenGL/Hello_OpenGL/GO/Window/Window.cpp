@@ -2,6 +2,7 @@
 #include "Input/Mouse.h"
 #include "Input/Keyboard.h"
 
+struct GLFWWindow;
 
 namespace go
 {
@@ -135,8 +136,11 @@ namespace go
 	{
 		glfwSwapBuffers(m_window);
 	}
-
-
-	
+	/*
+	Window::operator GLFWwindow*()
+	{
+		return this->m_window;
+	}
+	*/
 
 }
