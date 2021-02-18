@@ -1,6 +1,8 @@
 #ifndef GO_APPLICATION_H
 #define GO_APPLICATION_H
 
+#define GLFW_INCLUDE_NONE
+
 #include "Definitions.h"
 #include "Window/Window.h"
 #include "Graphics/Shader.h"
