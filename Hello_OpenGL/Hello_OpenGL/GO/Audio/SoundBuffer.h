@@ -1,8 +1,6 @@
 #ifndef GO_SOUNDBUFFER_H
 #define GO_SOUNDBUFFER_H
 
-#include <AL/al.h>
-#include <AL/alc.h>
 #include "Core/Definitions.h"
 
 namespace go
