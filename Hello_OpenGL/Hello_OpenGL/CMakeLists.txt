@@ -22,8 +22,7 @@ include_directories("GO"
 "Dependencies/OpenAL/include"
 "Dependencies/STB_IMAGE"
 "Dependencies/FreeType/include"
-"Dependencies/dr_libs"
-"Dependencies/ImGui")
+"Dependencies/dr_libs")
 
 set ( PROJECT_LINK_LIBS glfw3.lib 
 OpenAL32.lib 
@@ -40,12 +39,10 @@ file(GLOB SOURCES
 "GO/Audio/*.cpp"
 "GO/Core/*.cpp"
 "GO/Graphics/*.cpp"
-"GO/GUI/*.cpp"
 "GO/Input/*.cpp"
 "GO/Math/*.cpp"
 "GO/Utils/*.cpp"
-"GO/Window/*.cpp"
-"Dependencies/imgui-master/*.cpp")
+"GO/Window/*.cpp")
 
 add_library(engine STATIC ${SOURCES} ${PROPERTIES})
 target_link_libraries(engine ${PROJECT_LINK_LIBS} ${PROPERTIES})
