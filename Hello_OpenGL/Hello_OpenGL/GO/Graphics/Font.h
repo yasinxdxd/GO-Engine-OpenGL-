@@ -1,10 +1,11 @@
 #ifndef GO_FONT_H
 #define GO_FONT_H
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
 #include "Math/Vectors.h"
 #include <map>
+
+typedef struct FT_LibraryRec_* FT_Library;
+typedef struct FT_FaceRec_* FT_Face;
 
 namespace go
 {
