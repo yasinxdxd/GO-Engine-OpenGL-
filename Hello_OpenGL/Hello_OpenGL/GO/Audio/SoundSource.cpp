@@ -1,6 +1,9 @@
 #include "SoundSource.h"
 #include <iostream>
 
+#include <AL/al.h>
+#include <AL/alc.h>
+
 namespace go
 {
 
