@@ -1,4 +1,5 @@
 #include "Text.h"
+#include <glad/glad.h>
 
 namespace go
 {

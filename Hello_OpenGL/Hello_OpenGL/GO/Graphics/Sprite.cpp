@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include <glad/glad.h>
 //#include <stdexcept>
 
 namespace go

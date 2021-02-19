@@ -1,6 +1,8 @@
 #include "Texture.h"
 #include "stb_image.h"
 #include <fstream>
+#include <glad/glad.h>
+
 namespace go
 {
 	Texture::Texture()

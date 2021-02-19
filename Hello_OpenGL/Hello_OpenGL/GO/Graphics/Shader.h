@@ -4,7 +4,6 @@
 
 #include "Core/Definitions.h"
 #include "Math/Vectors.h"
-#include <glad/glad.h>
 #include <string>
 #include <iostream>
 #include <fstream>
