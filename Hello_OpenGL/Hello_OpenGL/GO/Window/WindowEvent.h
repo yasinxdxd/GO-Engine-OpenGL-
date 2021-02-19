@@ -1,8 +1,8 @@
 #ifndef GO_WINDOW_EVENT
 #define GO_WINDOW_EVENT
 #include "Core/Definitions.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+
+struct GLFWwindow;
 
 
 namespace go

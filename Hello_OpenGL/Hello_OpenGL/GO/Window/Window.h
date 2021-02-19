@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 
-struct GLFWWindow;
+struct GLFWwindow;
 
 namespace go
 {

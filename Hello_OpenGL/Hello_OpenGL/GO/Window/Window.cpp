@@ -1,8 +1,9 @@
 #include "Window/Window.h"
 #include "Input/Mouse.h"
 #include "Input/Keyboard.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
-struct GLFWWindow;
 
 namespace go
 {
