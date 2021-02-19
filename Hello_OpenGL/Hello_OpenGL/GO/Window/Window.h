@@ -4,7 +4,6 @@
 #include "Math/Vectors.h"
 #include "Graphics/Renderable.h"
 #include "Window/WindowEvent.h"
-#include "GUI/GUI.h"
 #include <iostream>
 #include <string>
 
@@ -53,8 +52,7 @@ namespace go
 		GOfloat m_aspectRatio;
 		GOfloat m_FPS;
 	
-		
-	friend class GUI;
+	
 	};
 
 }
