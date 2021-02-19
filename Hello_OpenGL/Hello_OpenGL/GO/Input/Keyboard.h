@@ -2,7 +2,8 @@
 #define GO_KEYBOAR_H
 
 #include "Core/Definitions.h"
-#include "GLFW/glfw3.h"
+
+struct GLFWwindow;
 
 namespace go
 {

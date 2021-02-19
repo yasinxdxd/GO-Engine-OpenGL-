@@ -2,7 +2,8 @@
 #define GO_MOUSE_H
 
 #include "Math/Vectors.h"
-#include "GLFW/glfw3.h"
+
+struct GLFWwindow;
 
 namespace go
 {
