@@ -1,1 +1,1 @@
-# GO-Engine-OpenGL-
+# GO OpenGL 2D Graphich Library C/C++
