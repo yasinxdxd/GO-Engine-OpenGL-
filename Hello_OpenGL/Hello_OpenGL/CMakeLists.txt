@@ -15,9 +15,14 @@ endif()
 
 if(MSVC)
 set(CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
-endif(MSVC)
+endif()
 
-include_directories("GO"
+if(MSVC)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+    set(BUILD_SHARED_LIBS TRUE)
+endif()
+
+include_directories("GO/include"
 "Dependencies/OpenGL/include"
 "Dependencies/OpenAL/include"
 "Dependencies/STB_IMAGE"
@@ -25,25 +30,25 @@ include_directories("GO"
 "Dependencies/dr_libs")
 
 set ( PROJECT_LINK_LIBS glfw3.lib 
-OpenAL32.lib 
-common.lib
-ex-common.lib
-freetype.lib )
+						OpenAL32.lib 
+						common.lib
+						ex-common.lib
+						freetype.lib )
 
 link_directories("Dependencies/OpenGL/lib"
-"Dependencies/OpenAL/lib"
-"Dependencies/FreeType/lib"
-"Dependencies/OpenGL/lib")
+				 "Dependencies/OpenAL/lib"
+				 "Dependencies/FreeType/lib"
+				 "Dependencies/OpenGL/lib")
 
 file(GLOB SOURCES
-"GO/Audio/*.cpp"
-"GO/Core/*.cpp"
-"GO/Graphics/*.cpp"
-"GO/Input/*.cpp"
-"GO/Math/*.cpp"
-"GO/Utils/*.cpp"
-"GO/Window/*.cpp")
+"GO/src/Audio/*.cpp"
+"GO/src/Core/*.cpp"
+"GO/src/Graphics/*.cpp"
+"GO/src/Input/*.cpp"
+"GO/src/Window/*.cpp"
+"glad.c")
 
-add_library(engine STATIC ${SOURCES} ${PROPERTIES})
-target_link_libraries(engine ${PROJECT_LINK_LIBS} ${PROPERTIES})
-install(TARGETS engine DESTINATION GO/bin)
+
+add_library(engine SHARED ${SOURCES} ${PROPERTIES})
+target_link_libraries(engine ${PROJECT_LINK_LIBS})
+install(TARGETS engine DESTINATION usr/lib)
