@@ -1,4 +1,4 @@
-#include "VertexArray.h"
+#include "Graphics/VertexArray.h"
 #include <glad/glad.h>
 #include "Math/Vectors.h"
 #include <iostream>

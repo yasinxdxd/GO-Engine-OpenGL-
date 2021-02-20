@@ -1,4 +1,4 @@
-#include "Mouse.h"
+#include "Input/Mouse.h"
 #include <GLFW/glfw3.h>
 
 namespace go

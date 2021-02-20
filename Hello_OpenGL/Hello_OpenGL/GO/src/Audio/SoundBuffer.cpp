@@ -1,4 +1,4 @@
-#include "SoundBuffer.h"
+#include "Audio/SoundBuffer.h"
 #include "Utils/Utils.h"
 #define DR_WAV_IMPLEMENTATION
 #include "dr_wav.h"

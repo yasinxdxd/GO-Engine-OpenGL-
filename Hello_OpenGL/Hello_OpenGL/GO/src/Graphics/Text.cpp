@@ -1,4 +1,4 @@
-#include "Text.h"
+#include "Graphics/Text.h"
 #include <glad/glad.h>
 
 namespace go

@@ -13,7 +13,6 @@
 #include "Audio/SoundBuffer.h"
 #include "Audio/SoundSource.h"
 /*----------------------------------*/
-#include "GUI/GUI.h"
 /*----------------------------------*/
 #include <chrono>
 #include <thread>
